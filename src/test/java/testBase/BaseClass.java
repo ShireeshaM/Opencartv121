@@ -48,6 +48,8 @@ public class BaseClass {
 			// os
 			if (os.equalsIgnoreCase("windows")) {
 				capabilities.setPlatform(Platform.WIN10);
+			} else if (os.equalsIgnoreCase("linux")) {
+				capabilities.setPlatform(Platform.LINUX);
 			} else if (os.equalsIgnoreCase("mac")) {
 				capabilities.setPlatform(Platform.MAC);
 			} else {
@@ -57,15 +59,10 @@ public class BaseClass {
 
 			// browser
 			switch (br.toLowerCase()) {
-			case "chrome":
-				capabilities.setBrowserName("chrome");
-				break;
-			case "edhe":
-				capabilities.setBrowserName("MicrosoftEdge");
-				break;
-			default:
-				System.out.println("No matching browser");
-				return;
+			case "chrome": capabilities.setBrowserName("chrome"); break;
+			case "edge": capabilities.setBrowserName("MicrosoftEdge"); break;
+			case "firefox": capabilities.setBrowserName("firefox"); break;
+			default: System.out.println("No matching browser"); return;
 			}
 
 			driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), capabilities);
@@ -73,15 +70,9 @@ public class BaseClass {
 
 		if (p.getProperty("execution_env").equalsIgnoreCase("local")) {
 			switch (br.toLowerCase()) {
-			case "chrome":
-				driver = new ChromeDriver();
-				break;
-			case "edge":
-				driver = new EdgeDriver();
-				break;
-			default:
-				System.out.println("Invalid browser");
-				return;
+			case "chrome": driver = new ChromeDriver(); break;
+			case "edge": driver = new EdgeDriver(); break;
+			default: System.out.println("Invalid browser"); return;
 
 			}
 		}
